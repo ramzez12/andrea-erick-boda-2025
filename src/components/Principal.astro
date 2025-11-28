@@ -1,0 +1,277 @@
+---
+// src/components/Principal.astro
+---
+
+<section class="min-h-screen w-full flex justify-center ">
+  <div class="relative w-full max-w-[480px]">
+    
+    <!-- Decoración floral superior -->
+    <div class="absolute top-0 left-0 right-0 h-32 overflow-hidden">
+      <div id="flor-izq" class="absolute top-0 left-0 w-28 h-28">
+        <img src="/imagenes/floriz.webp" alt="" class="w-full h-full object-contain" />
+      </div>
+      <div id="flor-der" class="absolute top-0 right-0 w-28 h-28 opacity-80">
+        <img src="/imagenes/florde.webp" alt="" class="w-full h-full object-contain" />
+      </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="relative z-10 pt-28 pb-2 px-6">
+      
+      <!-- Título: ¡NOS CASAMOS! -->
+      <h1 id="titulo" class="text-2xl font-serif text-[#c9a961] text-center mb-6 tracking-wider font-bold">
+        ¡NOS CASAMOS!
+      </h1>
+
+      <!-- Nombres de los novios -->
+      <div id="nombres" class="text-5xl font-script text-[#5a6650] text-center mb-6">
+        Andrea <span class="text-4xl mx-2">&</span> Erick
+      </div>
+
+      <!-- Fecha -->
+      <div id="fecha" class="text-center mb-2 font-serif text-[#5a6650]">
+        <p class="text-lg">SÁBADO 27 DE DICIEMBRE</p>
+      </div>
+
+      <!-- Sobre -->
+      <div id="sobre-container" class="flex justify-center mb-4 cursor-pointer">
+        <div class="relative">
+          <img src="/imagenes/sobre.webp" alt="Sobre de invitación" class="w-[280px]" />
+          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-center">
+            <div class="text-xs font-serif">👆 Hacer clic</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Texto instrucción -->
+      <p id="instruccion" class="text-center text-[#5a6650] font-serif text-base uppercase tracking-wide mb-4 px-4">
+        Hacer clic en el sobre para ver la invitación
+      </p>
+
+      <!-- Botones -->
+      <div class="flex flex-col items-center gap-3 mb-2">
+        <!-- Dos botones superiores -->
+        <div class="flex gap-3 justify-center w-full">
+
+          <!-- registro civil -->
+          <a href="https://maps.app.goo.gl/zeAxewG4NKgYwBy99" target="_blank" class="cursor-pointer">
+            <button class="boton-accion cursor-pointer transition-transform hover:scale-105">
+              <img src="/imagenes/registro.webp" alt="Ubicación Registro Civil" class="w-[145px]" />
+            </button>
+          </a>
+
+          <!-- recepció -->
+          <a href="https://maps.app.goo.gl/AuGcGGE6YUpxad5v7" target="_blank" class="cursor-pointer">
+            <button class="boton-accion cursor-pointer transition-transform hover:scale-105">
+              <img src="/imagenes/recepcion.webp" alt="Ubicación Recepción Social" class="w-[145px]" />
+            </button>
+          </a>
+
+        </div>
+
+        <!-- Botón confirmar asistencia -->
+        <a href="https://wa.link/ir3iwj" target="_blank" class="cursor-pointer">
+          <button class="boton-accion cursor-pointer transition-transform hover:scale-105">
+            <img src="/imagenes/confirmar.webp" alt="Confirmar Asistencia" class="w-[145px]" />
+          </button>
+        </a>
+      </div>
+
+
+      <!-- Texto final -->
+      <p id="texto-final" class="text-center text-[#5a6650] font-serif text-base italic px-6">
+        Por favor, confirmar hasta el 15 de diciembre.
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Modal para el video -->
+<div id="video-modal" class="hidden fixed inset-0 z-50">
+  <div class="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" 
+       style="background-image: url('/imagenes/portada2.webp');"></div>
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  
+  <div class="relative w-full h-full flex justify-center items-center">
+    <button id="cerrar-video" class="absolute top-4 right-4 bg-white/90 backdrop-blur-md border border-white/50 text-[#5a6650] rounded-full px-4 py-2 flex items-center gap-1.5 z-20 hover:bg-white hover:scale-105 transition-all shadow-lg">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+      </svg>
+      <span class="font-serif text-xs tracking-wide font-medium">Volver</span>
+    </button>
+    
+    <video id="video-player" class="w-full h-full object-cover md:object-contain" controls>
+      <source src="/video/video.mp4" type="video/mp4">
+      Tu navegador no soporta el video.
+    </video>
+  </div>
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant:wght@300;400;600;700&display=swap');
+  
+  .font-script {
+    font-family: 'Great Vibes', cursive;
+  }
+  
+  .font-serif {
+    font-family: 'Cormorant', serif;
+  }
+
+  /* Personalizar controles del video */
+  #video-player::-webkit-media-controls-play-button {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+  }
+  
+  #video-player::-webkit-media-controls-panel {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  if (typeof window !== 'undefined') {
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("✨ Iniciando animaciones elegantes...");
+
+      // Estado inicial - Todo oculto
+      gsap.set("#flor-izq", { opacity: 0, x: -100 });
+      gsap.set("#flor-der", { opacity: 0, x: 100 });
+      gsap.set("#titulo", { opacity: 0, y: -20 });
+      gsap.set("#nombres", { opacity: 0, y: -20 });
+      gsap.set("#fecha", { opacity: 0, y: 20 });
+      gsap.set("#sobre-container", { opacity: 0, scale: 0.95 });
+      gsap.set("#instruccion", { opacity: 0, y: 20 });
+      gsap.set(".boton-accion", { opacity: 0, y: 20 });
+      gsap.set("#texto-final", { opacity: 0, y: 20 });
+
+      // Timeline - TODAS las animaciones al mismo tiempo (muy suaves)
+      const tl = gsap.timeline({ delay: 0.5 });
+
+      // TODAS inician con "<" para que sean simultáneas
+      tl.to("#flor-izq", {
+        opacity: 0.8,
+        x: 0,
+        duration: 2,
+        ease: "power1.out"
+      })
+      .to("#flor-der", {
+        opacity: 0.8,
+        x: 0,
+        duration: 2,
+        ease: "power1.out"
+      }, "<")
+      .to("#titulo", {
+        opacity: 1,
+        y: 0,
+        duration: 1.8,
+        ease: "power1.out"
+      }, "<")
+      .to("#nombres", {
+        opacity: 1,
+        y: 0,
+        duration: 1.8,
+        ease: "power1.out"
+      }, "<")
+      .to("#fecha", {
+        opacity: 1,
+        y: 0,
+        duration: 1.8,
+        ease: "power1.out"
+      }, "<")
+      .to("#sobre-container", {
+        opacity: 1,
+        scale: 1,
+        duration: 1.8,
+        ease: "power1.out"
+      }, "<")
+      .to("#instruccion", {
+        opacity: 1,
+        y: 0,
+        duration: 1.8,
+        ease: "power1.out"
+      }, "<")
+      .to(".boton-accion", {
+        opacity: 1,
+        y: 0,
+        duration: 1.8,
+        ease: "power1.out"
+      }, "<")
+      .to("#texto-final", {
+        opacity: 1,
+        y: 0,
+        duration: 1.8,
+        ease: "power1.out"
+      }, "<");
+
+      // Hover suave en el sobre
+      const sobreContainer = document.getElementById('sobre-container');
+      if (sobreContainer) {
+        sobreContainer.addEventListener('mouseenter', () => {
+          gsap.to('#sobre-container', {
+            y: -8,
+            scale: 1.03,
+            duration: 0.4,
+            ease: "power1.out"
+          });
+        });
+
+        sobreContainer.addEventListener('mouseleave', () => {
+          gsap.to('#sobre-container', {
+            y: 0,
+            scale: 1,
+            duration: 0.4,
+            ease: "power1.out"
+          });
+        });
+      }
+
+      // Funcionalidad del video
+      const videoModal = document.getElementById('video-modal');
+      const videoPlayer = document.getElementById('video-player');
+      const cerrarVideo = document.getElementById('cerrar-video');
+
+      sobreContainer?.addEventListener('click', () => {
+        videoModal?.classList.remove('hidden');
+        gsap.fromTo(videoModal, 
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5, ease: "power1.out" }
+        );
+        if (videoPlayer) {
+          videoPlayer.muted = false;
+          videoPlayer.play();
+        }
+      });
+
+      const cerrarModal = () => {
+        gsap.to(videoModal, {
+          opacity: 0,
+          duration: 0.4,
+          ease: "power1.in",
+          onComplete: () => {
+            videoModal?.classList.add('hidden');
+          }
+        });
+        videoPlayer?.pause();
+        if (videoPlayer) {
+          videoPlayer.currentTime = 0;
+          videoPlayer.muted = true;
+        }
+      };
+
+      cerrarVideo?.addEventListener('click', cerrarModal);
+      
+      videoModal?.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+          cerrarModal();
+        }
+      });
+
+      console.log("✨ Animaciones completadas!");
+    });
+  }
+</script>
